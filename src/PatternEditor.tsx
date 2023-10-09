@@ -53,9 +53,31 @@ function ArrowSelector(props: ASProps) {
 }
 
 function PatternEditor() {
-  const [arrows, setArrows] = useState(initialState);
+  const [arrows, setArrows] = useState<boolean[][]>(Array(4).fill(initialState));
 
-  return <ArrowSelector arrows={arrows} onChange={setArrows} />;
+  function updateArrows(moment: boolean[], i: number) {
+    const newArrows = replacing(arrows, i, moment);
+    const arrowsToAdd = Math.max(0, i + 4 - arrows.length);
+    for (let j = 0; j < arrowsToAdd; j++) {
+      newArrows.push(initialState);
+    }
+
+    setArrows(newArrows);
+  }
+
+  function renderMoment(moment: boolean[], i: number) {
+    return <ArrowSelector
+      key={i} // Using index an key is only OK while I don't have an abitily to remove moments
+      arrows={moment}
+      onChange={a => updateArrows(a, i)}
+    />
+  }
+
+  return (
+    <>
+      {arrows.map(renderMoment)}
+    </>
+  )
 }
 
 export default PatternEditor
