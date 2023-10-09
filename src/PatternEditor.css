@@ -1,0 +1,7 @@
+.hidden {
+  opacity: 10%;
+}
+
+.hidden:hover {
+  opacity: 70%
+}
