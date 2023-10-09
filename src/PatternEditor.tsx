@@ -20,13 +20,22 @@ const arrowChars = [
 
 const initialState = arrowChars.map(() => false);
 
-function ArrowSelector() {
-  const [arrows, setArrows] = useState(initialState);
+interface ASProps {
+  arrows: boolean[];
+  onChange: (newState: boolean[]) => void;
+}
+
+function ArrowSelector(props: ASProps) {
+
+  function updateState(newState: boolean[]) {
+    props.onChange(newState);
+  }
 
   function renderArrow(active: boolean, i: number) {
     return (
       <button
-        onClick={() => setArrows(replacing(arrows, i, !active))}
+        key={i}
+        onClick={() => updateState(replacing(props.arrows, i, !active))}
         className={classNames({
           hidden: !active
         })}
@@ -38,13 +47,15 @@ function ArrowSelector() {
 
   return (
     <div>
-      {arrows.map(renderArrow)}
+      {props.arrows.map(renderArrow)}
     </div>
   );
 }
 
 function PatternEditor() {
-  return <ArrowSelector />;
+  const [arrows, setArrows] = useState(initialState);
+
+  return <ArrowSelector arrows={arrows} onChange={setArrows} />;
 }
 
 export default PatternEditor
