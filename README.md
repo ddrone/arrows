@@ -12,6 +12,9 @@
 - [x] Implement a prompt before allowing to change the type if the pattern is non-empty.
 - [ ] Implement saving patterns (via downloading JSON file)
 - [ ] Implement loading patterns (via file input? Figure out a way)
-- [ ] Create arrows viewer component, just showing them statically at the moment
+- [ ] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
+- [ ] Create table-based practice mode a la Synthesia, advancing the pattern only on correct key presses
+- [ ] Implement a way to customize keybinds of the practice tool
+- [ ] Implement touchscreen controls for the practice tool, and make sure it looks decent on iPad
 - [ ] Create simple arrow transformations: breaking the sequence with and without repetitions
 - [ ] Blank Vite project has a bunch of recommendations in README.md on what to do before deployment, check them out before deploying it anywhere
