@@ -1,5 +1,6 @@
-import PatternEditor from "./PatternEditor"
+import PatternEditor, { ArrowProps } from "./PatternEditor"
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 const downLeft = '↙️';
 const upLeft = '↖️';
@@ -7,12 +8,18 @@ const center = '🟧';
 const upRight = '↗️';
 const downRight = '↘️';
 
-const arrowChars = [
-  downLeft,
-  upLeft,
-  center,
-  upRight,
-  downRight
+function simple(s: string): ArrowProps {
+  return {
+    content: s
+  }
+}
+
+const arrowChars: ArrowProps[] = [
+  simple(downLeft),
+  { content: upLeft, className: 'red-arrow' },
+  simple(center),
+  { content: upRight, className: 'red-arrow' },
+  simple(downRight)
 ];
 
 const doubleChars = arrowChars.concat(arrowChars);

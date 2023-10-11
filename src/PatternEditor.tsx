@@ -4,10 +4,22 @@ import './PatternEditor.css';
 import { classNames } from "./utils/conditionalClasses";
 import { replacing } from "./utils/array";
 
+export type ArrowProps = {
+  content: string;
+  className?: string;
+}
+
+function Arrow(props: ArrowProps) {
+  return (
+    <span className={props.className}>
+      {props.content}
+    </span>
+  );
+}
 
 interface ASProps {
   arrows: boolean[];
-  arrowChars: string[];
+  arrowChars: ArrowProps[];
   onChange: (newState: boolean[]) => void;
 }
 
@@ -26,7 +38,7 @@ function ArrowSelector(props: ASProps) {
           hidden: !active
         })}
       >
-        {props.arrowChars[i]}
+        <Arrow {...props.arrowChars[i]} />
       </button>
     );
   }
@@ -39,7 +51,7 @@ function ArrowSelector(props: ASProps) {
 }
 
 interface PEProps {
-  arrowChars: string[];
+  arrowChars: ArrowProps[];
 }
 
 function PatternEditor(props: PEProps) {
