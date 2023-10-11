@@ -62,9 +62,13 @@ function EditorWithTypeSelector(props: EWTSProps) {
   const patType = props.patternTypes[patIndex];
   const [arrows, setArrows] = useState<boolean[][]>(initArrows(patType));
 
-  function updatePatternType(newIndex: number) {
+  function isClearingOK(): boolean {
     const arrowsEmpty = arrows.every(row => row.every(x => !x));
-    if (arrowsEmpty || confirm('Current state will be cleared, are you sure?')) {
+    return arrowsEmpty || confirm('Current state will be replaced, are you sure?');
+  }
+
+  function updatePatternType(newIndex: number) {
+    if (isClearingOK()) {
       setPatIndex(newIndex);
       setArrows(initArrows(props.patternTypes[newIndex]));
     }
@@ -108,8 +112,10 @@ function EditorWithTypeSelector(props: EWTSProps) {
       }
     }
 
-    setPatIndex(newIndex);
-    setArrows(arrows);
+    if (isClearingOK()) {
+      setPatIndex(newIndex);
+      setArrows(arrows);
+    }
     return true;
   }
 
