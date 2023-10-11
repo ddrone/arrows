@@ -4,24 +4,10 @@ import './PatternEditor.css';
 import { classNames } from "./utils/conditionalClasses";
 import { replacing } from "./utils/array";
 
-const downLeft = '↙️';
-const upLeft = '↖️';
-const center = '🟧';
-const upRight = '↗️';
-const downRight = '↘️';
-
-const arrowChars = [
-  downLeft,
-  upLeft,
-  center,
-  upRight,
-  downRight
-];
-
-const initialState = arrowChars.map(() => false);
 
 interface ASProps {
   arrows: boolean[];
+  arrowChars: string[];
   onChange: (newState: boolean[]) => void;
 }
 
@@ -40,7 +26,7 @@ function ArrowSelector(props: ASProps) {
           hidden: !active
         })}
       >
-        {arrowChars[i]}
+        {props.arrowChars[i]}
       </button>
     );
   }
@@ -52,14 +38,18 @@ function ArrowSelector(props: ASProps) {
   );
 }
 
-function PatternEditor() {
-  const [arrows, setArrows] = useState<boolean[][]>(Array(4).fill(initialState));
+interface PEProps {
+  arrowChars: string[];
+}
+
+function PatternEditor(props: PEProps) {
+  const [arrows, setArrows] = useState<boolean[][]>(Array(4).fill(props.arrowChars.map(() => false)));
 
   function updateArrows(moment: boolean[], i: number) {
     const newArrows = replacing(arrows, i, moment);
     const arrowsToAdd = Math.max(0, i + 4 - arrows.length);
     for (let j = 0; j < arrowsToAdd; j++) {
-      newArrows.push(initialState);
+      newArrows.push(props.arrowChars.map(() => false));
     }
 
     setArrows(newArrows);
@@ -70,6 +60,7 @@ function PatternEditor() {
       key={i} // Using index an key is only OK while I don't have an abitily to remove moments
       arrows={moment}
       onChange={a => updateArrows(a, i)}
+      arrowChars={props.arrowChars}
     />
   }
 
