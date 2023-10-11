@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import './PatternEditor.css';
 import { classNames } from "./utils/conditionalClasses";
 import { replacing } from "./utils/array";
@@ -51,11 +49,13 @@ function ArrowSelector(props: ASProps) {
 }
 
 interface PEProps {
+  arrows: boolean[][];
+  onUpdate: (newArrows: boolean[][]) => void;
   arrowChars: ArrowProps[];
 }
 
 function PatternEditor(props: PEProps) {
-  const [arrows, setArrows] = useState<boolean[][]>(Array(4).fill(props.arrowChars.map(() => false)));
+  const arrows = props.arrows;
 
   function updateArrows(moment: boolean[], i: number) {
     const newArrows = replacing(arrows, i, moment);
@@ -64,10 +64,14 @@ function PatternEditor(props: PEProps) {
       newArrows.push(props.arrowChars.map(() => false));
     }
 
-    setArrows(newArrows);
+    props.onUpdate(newArrows);
   }
 
   function renderMoment(moment: boolean[], i: number) {
+    if (moment.length !== props.arrowChars.length) {
+      throw new Error(`internal error: wrong number of arrows (${moment.length})`);
+    }
+
     return <ArrowSelector
       key={i} // Using index an key is only OK while I don't have an abitily to remove moments
       arrows={moment}

@@ -2,6 +2,7 @@ import PatternEditor, { ArrowProps } from "./PatternEditor"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useState } from "react";
+import { repeat } from "./utils/array";
 
 const downLeft = '↙️';
 const upLeft = '↖️';
@@ -48,18 +49,28 @@ interface EWTSProps {
   patternTypes: PatternType[]
 }
 
+function initArrows(patType: PatternType): boolean[][] {
+  return repeat(repeat(false, patType.arrowChars.length), 4);
+}
+
 function EditorWithTypeSelector(props: EWTSProps) {
   const [patIndex, setPatIndex] = useState<number>(0);
   const patType = props.patternTypes[patIndex];
+  const [arrows, setArrows] = useState<boolean[][]>(initArrows(patType));
+
+  function updatePatternType(newIndex: number) {
+    setPatIndex(newIndex);
+    setArrows(initArrows(props.patternTypes[newIndex]));
+  }
 
   return (
     <>
-      <select value={patIndex} onChange={e => setPatIndex(Number(e.target.value))}>
+      <select value={patIndex} onChange={e => updatePatternType(Number(e.target.value))}>
         {props.patternTypes.map((p, index) => (
           <option value={index} key={index}>{p.description}</option>
         ))}
       </select>
-      <PatternEditor arrowChars={patType.arrowChars} />
+      <PatternEditor arrowChars={patType.arrowChars} arrows={arrows} onUpdate={setArrows} />
     </>
   );
 }
@@ -71,12 +82,6 @@ function App() {
       <div className="row">
         <div className="col">
           <EditorWithTypeSelector patternTypes={patternTypes} />
-        </div>
-        <div className="col">
-          <PatternEditor arrowChars={arrowChars} />
-        </div>
-        <div className="col">
-          <PatternEditor arrowChars={doubleChars} />
         </div>
       </div>
     </div>
