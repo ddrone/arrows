@@ -9,7 +9,7 @@
 - [x] Create pattern types, single and double with identificator and set of arrow props to render
 - [x] Add a type chooser, which should change the type of the editor
 - [x] Move the state of pattern editor upward, make sure that the current bug is fixed
-- [ ] Implement a prompt before allowing to change the type if the pattern is non-empty.
+- [x] Implement a prompt before allowing to change the type if the pattern is non-empty.
 - [ ] Implement saving patterns (via downloading JSON file)
 - [ ] Implement loading patterns (via file input? Figure out a way)
 - [ ] Create arrows viewer component, just showing them statically at the moment

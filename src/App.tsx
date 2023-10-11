@@ -59,8 +59,11 @@ function EditorWithTypeSelector(props: EWTSProps) {
   const [arrows, setArrows] = useState<boolean[][]>(initArrows(patType));
 
   function updatePatternType(newIndex: number) {
-    setPatIndex(newIndex);
-    setArrows(initArrows(props.patternTypes[newIndex]));
+    const arrowsEmpty = arrows.every(row => row.every(x => !x));
+    if (arrowsEmpty || confirm('Current state will be cleared, are you sure?')) {
+      setPatIndex(newIndex);
+      setArrows(initArrows(props.patternTypes[newIndex]));
+    }
   }
 
   return (
