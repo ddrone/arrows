@@ -1,7 +1,7 @@
 import PatternEditor, { ArrowProps } from "./PatternEditor"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { repeat } from "./utils/array";
 
 const downLeft = '↙️';
