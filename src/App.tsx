@@ -130,7 +130,7 @@ function EditorWithTypeSelector(props: EWTSProps) {
       }
     });
 
-    e.target.files = null;
+    e.target.value = '';
   }
 
   return (
