@@ -53,6 +53,10 @@ function initArrows(patType: PatternType): boolean[][] {
   return repeat(repeat(false, patType.arrowChars.length), 4);
 }
 
+function encodeJsonDownloadLink(value: unknown): string {
+  return `data:application/json,${JSON.stringify(value)}`;
+}
+
 function EditorWithTypeSelector(props: EWTSProps) {
   const [patIndex, setPatIndex] = useState<number>(0);
   const patType = props.patternTypes[patIndex];
@@ -74,6 +78,7 @@ function EditorWithTypeSelector(props: EWTSProps) {
         ))}
       </select>
       <PatternEditor arrowChars={patType.arrowChars} arrows={arrows} onUpdate={setArrows} />
+      <a href={encodeJsonDownloadLink({type: patType.id, arrows})} download="pattern.json">Download</a>
     </>
   );
 }
