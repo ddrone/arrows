@@ -1,0 +1,4 @@
+.red-arrow {
+  /* Makes red-ish arrow from blue one */
+  filter: hue-rotate(160deg);
+}
