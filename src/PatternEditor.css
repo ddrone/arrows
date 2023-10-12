@@ -5,3 +5,8 @@
 .hidden:hover {
   opacity: 70%
 }
+
+.arrow-btn {
+  -webkit-appearance: none;
+  padding: 0.35rem;
+}

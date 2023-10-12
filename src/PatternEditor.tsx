@@ -29,7 +29,8 @@ function ArrowSelector(props: ASProps) {
         key={i}
         onClick={() => updateState(replacing(props.arrows, i, !active))}
         className={classNames({
-          hidden: !active
+          hidden: !active,
+          ['arrow-btn']: true,
         })}
       >
         <Arrow {...props.arrowChars[i]} />
