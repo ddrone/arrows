@@ -14,8 +14,10 @@
 - [x] Implement loading patterns (via file input? Figure out a way)
 - [x] Add a prompt before loading a file as well
 - [x] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
-- [ ] Create table-based practice mode a la Synthesia, advancing the pattern only on correct key presses
-- [ ] Implement a way to customize keybinds of the practice tool
-- [ ] Implement touchscreen controls for the practice tool, and make sure it looks decent on iPad
+- [x] Encode button layouts
+- [ ] Create a component that will allow to press one button at a time (no brackets)
+- [ ] Make pressing the correct button advance the pattern in the viewer, effectively implementing a simple training mode
+- [ ] Implement a way to interact with the button layout via keypresses
+- [ ] Make sure that button layout looks decent on iPad
 - [ ] Create simple arrow transformations: breaking the sequence with and without repetitions
 - [ ] Blank Vite project has a bunch of recommendations in README.md on what to do before deployment, check them out before deploying it anywhere

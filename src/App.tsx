@@ -29,6 +29,7 @@ interface PatternType {
   id: string;
   description: string;
   arrowChars: ArrowProps[];
+  buttonLayout: number[][];
 }
 
 const doubleChars = arrowChars.concat(arrowChars);
@@ -37,12 +38,22 @@ const patternTypes: PatternType[] = [
   {
     id: 'pump-double',
     description: 'Double',
-    arrowChars: doubleChars
+    arrowChars: doubleChars,
+    buttonLayout: [
+      [  1, -1,  3,  6, -1,  8 ],
+      [ -1,  2, -1, -1,  7, -1 ],
+      [  0, -1,  4,  5, -1,  9 ]
+    ]
   },
   {
     id: 'pump-single',
     description: 'Single',
-    arrowChars: arrowChars
+    arrowChars: arrowChars,
+    buttonLayout: [
+      [  1, -1,  3 ],
+      [ -1,  2, -1 ],
+      [  0, -1,  4 ]
+    ]
   },
 ];
 
