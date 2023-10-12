@@ -13,7 +13,7 @@
 - [x] Implement saving patterns (via downloading JSON file)
 - [x] Implement loading patterns (via file input? Figure out a way)
 - [x] Add a prompt before loading a file as well
-- [ ] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
+- [x] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
 - [ ] Create table-based practice mode a la Synthesia, advancing the pattern only on correct key presses
 - [ ] Implement a way to customize keybinds of the practice tool
 - [ ] Implement touchscreen controls for the practice tool, and make sure it looks decent on iPad

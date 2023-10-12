@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { ChangeEvent, useState } from "react";
 import { repeat } from "./utils/array";
+import PatternViewer from "./PatternViewer";
 
 const downLeft = '↙️';
 const upLeft = '↖️';
@@ -141,16 +142,21 @@ function EditorWithTypeSelector(props: EWTSProps) {
 
   return (
     <>
-      <select value={patIndex} onChange={e => updatePatternType(Number(e.target.value))}>
-        {props.patternTypes.map((p, index) => (
-          <option value={index} key={index}>{p.description}</option>
-        ))}
-      </select>
-      <PatternEditor arrowChars={patType.arrowChars} arrows={arrows} onUpdate={setArrows} />
-      <div>
-        <a href={encodeJsonDownloadLink({type: patType.id, arrows})} download="pattern.json">Download</a>
+      <div className="col">
+        <select value={patIndex} onChange={e => updatePatternType(Number(e.target.value))}>
+          {props.patternTypes.map((p, index) => (
+            <option value={index} key={index}>{p.description}</option>
+          ))}
+        </select>
+        <PatternEditor arrowChars={patType.arrowChars} arrows={arrows} onUpdate={setArrows} />
+        <div>
+          <a href={encodeJsonDownloadLink({type: patType.id, arrows})} download="pattern.json">Download</a>
+        </div>
+        <input type="file" accept=".json" onChange={openPattern} />
       </div>
-      <input type="file" accept=".json" onChange={openPattern} />
+      <div className="col">
+        <PatternViewer arrowChars={patType.arrowChars} arrows={arrows} />
+      </div>
     </>
   );
 }
@@ -160,9 +166,7 @@ function App() {
     <div className="container">
       <h1>Five arrows (mostly ten, actually)</h1>
       <div className="row">
-        <div className="col">
-          <EditorWithTypeSelector patternTypes={patternTypes} />
-        </div>
+        <EditorWithTypeSelector patternTypes={patternTypes} />
       </div>
     </div>
   )

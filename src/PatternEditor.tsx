@@ -7,7 +7,7 @@ export type ArrowProps = {
   className?: string;
 }
 
-function Arrow(props: ArrowProps) {
+export function Arrow(props: ArrowProps) {
   return (
     <span className={props.className}>
       {props.content}
