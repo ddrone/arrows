@@ -2,7 +2,8 @@ import { Arrow } from "./PatternEditor"
 import { PatternType } from "./types"
 
 interface BPProps {
-  patternType: PatternType
+  patternType: PatternType,
+  onClick: (arrId: number) => void;
 }
 
 function ButtonPad(props: BPProps) {
@@ -11,7 +12,7 @@ function ButtonPad(props: BPProps) {
       <tr>
         {rowLayout.map(id =>
           <td>
-            {id >= 0 && <button>
+            {id >= 0 && <button onClick={() => props.onClick(id)}>
               <Arrow {...props.patternType.arrowChars[id]} />
             </button>}
           </td>

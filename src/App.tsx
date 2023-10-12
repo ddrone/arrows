@@ -64,6 +64,36 @@ function encodeJsonDownloadLink(value: unknown): string {
   return `data:application/json,${JSON.stringify(value)}`;
 }
 
+interface PMProps {
+  patternType: PatternType;
+  arrows: boolean[][];
+}
+
+function PracticeMode(props: PMProps) {
+  const [offset, setOffset] = useState(0);
+  const patType = props.patternType;
+
+  function advance(id: number) {
+    if (offset >= props.arrows.length) {
+      return;
+    }
+
+    const row = props.arrows[offset];
+    const correct = row.every((present, index) => present === (index === id));
+    if (correct) {
+      setOffset(offset + 1);
+    }
+  }
+
+  return (
+    <>
+      <PatternViewer arrowChars={patType.arrowChars} arrows={props.arrows} offset={offset} />
+      <ButtonPad patternType={patType} onClick={advance} />
+      <button onClick={() => setOffset(0)}>Restart</button>
+    </>
+  );
+}
+
 function EditorWithTypeSelector(props: EWTSProps) {
   const [patIndex, setPatIndex] = useState<number>(0);
   const patType = props.patternTypes[patIndex];
@@ -161,8 +191,7 @@ function EditorWithTypeSelector(props: EWTSProps) {
         <input type="file" accept=".json" onChange={openPattern} />
       </div>
       <div className="col">
-        <PatternViewer arrowChars={patType.arrowChars} arrows={arrows} />
-        <ButtonPad patternType={patType} />
+        <PracticeMode patternType={patType} arrows={arrows} />
       </div>
     </>
   );
