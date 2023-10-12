@@ -1,9 +1,11 @@
-import PatternEditor, { ArrowProps } from "./PatternEditor"
+import PatternEditor from "./PatternEditor"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { ChangeEvent, useState } from "react";
 import { repeat } from "./utils/array";
 import PatternViewer from "./PatternViewer";
+import { ArrowDescription, PatternType } from "./types";
+import ButtonPad from "./ButtonPad";
 
 const downLeft = '↙️';
 const upLeft = '↖️';
@@ -11,26 +13,19 @@ const center = '🟧';
 const upRight = '↗️';
 const downRight = '↘️';
 
-function simple(s: string): ArrowProps {
+function simple(s: string): ArrowDescription {
   return {
     content: s
   }
 }
 
-const arrowChars: ArrowProps[] = [
+const arrowChars: ArrowDescription[] = [
   simple(downLeft),
   { content: upLeft, className: 'red-arrow' },
   simple(center),
   { content: upRight, className: 'red-arrow' },
   simple(downRight)
 ];
-
-interface PatternType {
-  id: string;
-  description: string;
-  arrowChars: ArrowProps[];
-  buttonLayout: number[][];
-}
 
 const doubleChars = arrowChars.concat(arrowChars);
 
@@ -167,6 +162,7 @@ function EditorWithTypeSelector(props: EWTSProps) {
       </div>
       <div className="col">
         <PatternViewer arrowChars={patType.arrowChars} arrows={arrows} />
+        <ButtonPad patternType={patType} />
       </div>
     </>
   );

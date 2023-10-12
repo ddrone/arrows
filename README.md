@@ -15,7 +15,7 @@
 - [x] Add a prompt before loading a file as well
 - [x] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
 - [x] Encode button layouts
-- [ ] Create a component that will allow to press one button at a time (no brackets)
+- [x] Create a component that will allow to press one button at a time (no brackets)
 - [ ] Make pressing the correct button advance the pattern in the viewer, effectively implementing a simple training mode
 - [ ] Implement a way to interact with the button layout via keypresses
 - [ ] Make sure that button layout looks decent on iPad

@@ -1,11 +1,12 @@
-import { Arrow, ArrowProps } from "./PatternEditor";
+import { Arrow } from "./PatternEditor";
 import { range, repeat } from "./utils/array";
 import { classNames } from "./utils/conditionalClasses";
 
 import "./PatternViewer.css";
+import { ArrowDescription } from "./types";
 
 interface PVProps {
-  arrowChars: ArrowProps[];
+  arrowChars: ArrowDescription[];
   arrows: boolean[][];
   offset?: number;
 }
