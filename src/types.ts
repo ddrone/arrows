@@ -8,4 +8,5 @@ export interface PatternType {
   description: string;
   arrowChars: ArrowDescription[];
   buttonLayout: number[][];
+  keybindings: string[];
 }

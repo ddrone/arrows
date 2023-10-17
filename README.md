@@ -16,8 +16,8 @@
 - [x] Create arrows viewer component, just showing them statically at the moment (have offset as parameter, would be used for the next task)
 - [x] Encode button layouts
 - [x] Create a component that will allow to press one button at a time (no brackets)
-- [ ] Make pressing the correct button advance the pattern in the viewer, effectively implementing a simple training mode
-- [ ] Implement a way to interact with the button layout via keypresses
+- [x] Make pressing the correct button advance the pattern in the viewer, effectively implementing a simple training mode
+- [x] Implement a way to interact with the button layout via keypresses
 - [ ] Make sure that button layout looks decent on iPad
 - [ ] Create simple arrow transformations: breaking the sequence with and without repetitions
 - [ ] Blank Vite project has a bunch of recommendations in README.md on what to do before deployment, check them out before deploying it anywhere

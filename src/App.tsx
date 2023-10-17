@@ -1,7 +1,7 @@
 import PatternEditor from "./PatternEditor"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { repeat } from "./utils/array";
 import PatternViewer from "./PatternViewer";
 import { ArrowDescription, PatternType } from "./types";
@@ -38,6 +38,9 @@ const patternTypes: PatternType[] = [
       [  1, -1,  3,  6, -1,  8 ],
       [ -1,  2, -1, -1,  7, -1 ],
       [  0, -1,  4,  5, -1,  9 ]
+    ],
+    keybindings: [
+      'k', '0', '\'', '2', 'o', 'e', '3', 'p', '5', 'i'
     ]
   },
   {
@@ -48,6 +51,9 @@ const patternTypes: PatternType[] = [
       [  1, -1,  3 ],
       [ -1,  2, -1 ],
       [  0, -1,  4 ]
+    ],
+    keybindings: [
+      'k', '0', '\'', '2', 'o'
     ]
   },
 ];
@@ -71,7 +77,29 @@ interface PMProps {
 
 function PracticeMode(props: PMProps) {
   const [offset, setOffset] = useState(0);
+  const [lastPressedKey, setLastPressedKey] = useState<string>('');
   const patType = props.patternType;
+
+  function handleKeyDown(e: KeyboardEvent) {
+    setLastPressedKey(e.key);
+    // TODO: need to figure out how to not prevent every single keyboard event
+    e.preventDefault();
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+
+  useEffect(() => {
+    const keyIndex = props.patternType.keybindings.indexOf(lastPressedKey);
+    if (keyIndex !== -1) {
+      advance(keyIndex);
+    }
+  }, [lastPressedKey, props.patternType.keybindings]);
 
   function advance(id: number) {
     if (offset >= props.arrows.length) {
